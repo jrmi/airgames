@@ -3,6 +3,7 @@ import settlers from './games/settlers';
 import gloomhaven from './games/gloomhaven';
 import cards from './games/cards';
 import fs from 'fs';
+import { ncp } from 'ncp';
 
 const URL_PREFIX = process.env.URL_PREFIX || './';
 
@@ -41,6 +42,9 @@ fs.rmdir('./_build', { recursive: true }, (err) => {
       genJson(cards, 'cards');
 
       genJson(gameList, 'gameList');
+      ncp('./public/', '_build/', (err) => {
+        if (err) throw err;
+      });
     }
   });
 });
