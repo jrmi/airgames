@@ -1,1 +1,1 @@
-const URL_PREFIX = process.env.URL_PREFIX || './';
+export const URL_PREFIX = process.env.URL_PREFIX || './';
