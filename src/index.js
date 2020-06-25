@@ -5,7 +5,7 @@ import cards from './games/cards';
 import fs from 'fs';
 import { ncp } from 'ncp';
 
-const URL_PREFIX = process.env.URL_PREFIX || './';
+import { URL_PREFIX } from './config';
 
 const gameList = [
   { name: 'Tiktok', url: `${URL_PREFIX}tiktok.json` },
