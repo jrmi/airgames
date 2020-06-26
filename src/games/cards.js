@@ -1,35 +1,18 @@
+import { URL_PREFIX } from '../config';
+
 const genGame = () => {
   const items = [];
-
-  [...Array(3).keys()].forEach(() => {
-    items.push({
-      type: 'image',
-      content: '/games/card.jpg',
-      backContent: '/games/back.jpg',
-      width: 100,
-      flipped: true,
-      x: 100,
-      y: 100,
-    });
-
-    items.push({
-      type: 'image',
-      content: '/games/card.jpg',
-      backContent: '/games/back.jpg',
-      width: 100,
-      flipped: true,
-      x: 100,
-      y: 100,
-    });
-
-    items.push({
-      type: 'image',
-      content: '/games/8diamond.png',
-      backContent: '/games/back.jpg',
-      width: 100,
-      flipped: true,
-      x: 100,
-      y: 100,
+  Array.from('CDHS').forEach((color, colorIndex) => {
+    Array.from('A23456789BJQK').forEach((value, index) => {
+      items.push({
+        type: 'image',
+        content: `${URL_PREFIX}cards/${value}${color}.jpg`,
+        backContent: URL_PREFIX + 'cards/Red_back.jpg',
+        width: 60,
+        flipped: false,
+        x: 100 + 200 * colorIndex,
+        y: 100 + 1 * index,
+      });
     });
   });
 

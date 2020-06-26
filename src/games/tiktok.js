@@ -1,9 +1,11 @@
+import { URL_PREFIX } from '../config';
+
 const genTikTok = () => {
   const items = [];
 
   items.push({
     type: 'image',
-    content: '/games/tiktok.svg',
+    content: URL_PREFIX + '/tiktok/tiktok.svg',
     locked: true,
     x: 100,
     y: 100,
