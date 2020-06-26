@@ -1,5 +1,3 @@
-import box from './gloomhaven-box';
-
 const genGloomhavenBox = () => {
   const items = [];
 
@@ -464,11 +462,7 @@ const genGloomhavenBox = () => {
     });
   });
 
-  return {
-    items,
-    availableItems: box,
-    board: { size: 3000, scale: 0.5 },
-  };
+  return items;
 };
 
 export const gameBox = genGloomhavenBox();
