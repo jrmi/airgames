@@ -1,3 +1,5 @@
+import slugify from 'slugify';
+
 const genGloomhavenBox = () => {
   const items = [];
 
@@ -34,7 +36,7 @@ const genGloomhavenBox = () => {
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/brute-back.png',
     width: 300,
     label: 'Brute mat-board',
-    groupId: 'characters',
+    groupId: 'brute',
   });
 
   items.push({
@@ -45,7 +47,7 @@ const genGloomhavenBox = () => {
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/spellweaver-back.png',
     width: 300,
     label: 'Spellweaver mat-board',
-    groupId: 'characters',
+    groupId: 'spellweaver',
   });
 
   items.push({
@@ -54,7 +56,7 @@ const genGloomhavenBox = () => {
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/brute-perks.png',
     width: 300,
     label: 'Brute perks-board',
-    groupId: 'characters',
+    groupId: 'brute',
   });
 
   items.push({
@@ -63,7 +65,7 @@ const genGloomhavenBox = () => {
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/spellweaver-perks.png',
     width: 300,
     label: 'Spellweaver perks-board',
-    groupId: 'characters',
+    groupId: 'spellweaver',
   });
 
   // Attack modifiers
@@ -94,89 +96,41 @@ const genGloomhavenBox = () => {
     });
   });
 
-  // monster tokens
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/bandit-guard.png',
-    width: 60,
-    text: 'X',
-    overlay: {
-      content:
-        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/normal-monster-overlay.svg',
-    },
-    label: 'Bandit guard normal',
-    groupId: 'monster-tokens',
-  });
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/bandit-guard.png',
-    width: 60,
-    text: 'X',
-    overlay: {
-      content:
-        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/elite-monster-overlay.svg',
-    },
-    label: 'Bandit guard elite',
-    groupId: 'monster-tokens',
-  });
+  // monster section
+  const monsterNames = [
+    'Bandit guard',
+    'Bandit archer',
+    'Living bones',
+    'Living Corpse',
+  ];
+  const monsterModes = ['normal', 'elite'];
 
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/bandit-archer.png',
-    width: 60,
-    text: 'X',
-    overlay: {
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/normal-monster-overlay.svg`,
-    },
-    label: 'Bandit archer normal',
-    groupId: 'monster-tokens',
-  });
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/bandit-archer.png',
-    width: 60,
-    text: 'X',
-    overlay: {
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/elite-monster-overlay.svg`,
-    },
-    label: 'Bandit archer elite',
-    groupId: 'monster-tokens',
-  });
+  monsterNames.forEach((monsterName) => {
+    // monster tokens
+    monsterModes.forEach((monsterMode) => {
+      items.push({
+        type: 'image',
+        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/${slugify(
+          monsterName,
+          { lower: true }
+        )}.png`,
+        width: 60,
+        text: 'X',
+        overlay: {
+          content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/${monsterMode}-monster-overlay.svg`,
+        },
+        label: `${monsterName} ${monsterMode}`,
+        groupId: 'monster-tokens',
+      });
+    });
 
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/living-bones.png',
-    width: 60,
-    text: 'X',
-    overlay: {
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/normal-monster-overlay.svg`,
-    },
-    label: 'Living bones normal',
-    groupId: 'monster-tokens',
-  });
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/living-bones.png',
-    width: 60,
-    text: 'X',
-    overlay: {
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/elite-monster-overlay.svg`,
-    },
-    label: 'Living bones elite',
-    groupId: 'monster-tokens',
-  });
-
-  const monsters = ['bandit-guard', 'bandit-archer', 'living-bones'];
-  monsters.forEach((monsterName) => {
+    // monster stat cards
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/monster-stat-cards/${monsterName}-0.png`,
+      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/monster-stat-cards/${slugify(
+        monsterName,
+        { lower: true }
+      )}-0.png`,
       width: 200,
       label: `${monsterName}`,
       groupId: `monster-stats-cards`,
@@ -238,6 +192,8 @@ const genGloomhavenBox = () => {
   });
 
   // Character ability cards
+  const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
+
   const brute = {
     code: 'BR',
     abilityCards: {
@@ -271,14 +227,16 @@ const genGloomhavenBox = () => {
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/brute-character-token.png',
   };
 
-  brute.abilityCards['level-1'].forEach((abilityName) => {
-    items.push({
-      type: 'image',
-      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${brute.code}/${abilityName}.png`,
-      backContent: `${brute.backCard}`,
-      width: 100,
-      label: `Level 1 card: ${abilityName}`,
-      groupId: 'brute',
+  levels.forEach((level) => {
+    brute.abilityCards[`level-${level}`].forEach((abilityName) => {
+      items.push({
+        type: 'image',
+        content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${brute.code}/${abilityName}.png`,
+        backContent: `${brute.backCard}`,
+        width: 100,
+        label: `Level ${level} card: ${abilityName}`,
+        groupId: 'brute',
+      });
     });
   });
 
@@ -329,14 +287,16 @@ const genGloomhavenBox = () => {
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/spellweaver-character-token.png',
   };
 
-  spellWeaver.abilityCards['level-1'].forEach((abilityName) => {
-    items.push({
-      type: 'image',
-      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${spellWeaver.code}/${abilityName}.png`,
-      backContent: `${spellWeaver.backCard}`,
-      width: 100,
-      label: `Level 1 card: ${abilityName}`,
-      groupId: 'spellweaver',
+  levels.forEach((level) => {
+    spellWeaver.abilityCards[`level-${level}`].forEach((abilityName) => {
+      items.push({
+        type: 'image',
+        content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${spellWeaver.code}/${abilityName}.png`,
+        backContent: `${spellWeaver.backCard}`,
+        width: 100,
+        label: `Level ${level} card: ${abilityName}`,
+        groupId: 'spellweaver',
+      });
     });
   });
 
@@ -460,6 +420,87 @@ const genGloomhavenBox = () => {
       label: `${itemName}`,
       groupId: 'items 1-14',
     });
+  });
+
+  // Personal character goals
+  [...Array(24).keys()].forEach((_, index) => {
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/personal-goals/pg-${
+        index + 510
+      }.png`,
+      backContent:
+        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/personal-goals/pg-back.png',
+      width: 100,
+      label: `Quest ${index + 1}`,
+      groupId: 'personal-goals',
+    });
+  });
+
+  // City events
+  [...Array(90).keys()].forEach((_, index) => {
+    const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/events/base/city/ce-${number}-f.png`,
+      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/events/base/city/ce-${number}-b.png`,
+      width: 100,
+      label: `City event ${number}`,
+      groupId: 'city-events',
+    });
+  });
+
+  // Road events
+  [...Array(83).keys()].forEach((_, index) => {
+    const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/events/base/road/re-${number}-f.png`,
+      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/events/base/road/re-${number}-b.png`,
+      width: 100,
+      label: `Road event ${number}`,
+      groupId: 'road-events',
+    });
+  });
+
+  // Map elements
+  [...Array(95).keys()].forEach((_, index) => {
+    const number = index + 1;
+    if ([11, 12, 35, 36].includes(number)) {
+      // These tiles are special, and handled outside of this loop
+      return;
+    }
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/world-map/${number}.png`,
+      width: 100,
+      label: `Map tile ${number}`,
+      groupId: 'world-map',
+    });
+  });
+
+  items.push({
+    type: 'image',
+    content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/world-map/11-12.png`,
+    width: 100,
+    label: `Map tile 11-12`,
+    groupId: 'world-map',
+  });
+
+  items.push({
+    type: 'image',
+    content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/world-map/35-36.png`,
+    width: 100,
+    label: `Map tile 35-36`,
+    groupId: 'world-map',
+  });
+
+  items.push({
+    type: 'image',
+    content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/world-map/gloomhaven-map-orig.png`,
+    width: 1000,
+    label: `World map`,
+    groupId: 'world-map',
   });
 
   return items;
