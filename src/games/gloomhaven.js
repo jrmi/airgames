@@ -1,4 +1,5 @@
 import box from './gloomhaven-box';
+import { URL_PREFIX } from '../config';
 
 const genGloomhaven = () => {
   const items = [];
@@ -72,6 +73,7 @@ const genGloomhaven = () => {
         }b.png`,
         text: `${l}${y}a`,
         backText: `${l}${y}b`,
+        layer: -1,
         x: 558,
         y: 80,
       });
@@ -87,6 +89,7 @@ const genGloomhaven = () => {
     backContent:
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/brute-back.png',
     width: 300,
+    layer: -1,
     x: 500,
     y: 500,
   });
@@ -98,6 +101,7 @@ const genGloomhaven = () => {
     backContent:
       'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/spellweaver-back.png',
     width: 300,
+    layer: -1,
     x: 500,
     y: 700,
   });
@@ -442,6 +446,7 @@ const genGloomhaven = () => {
       x: 0 + 100 * index,
       y: 1150,
       width: 100,
+      layer: 1,
     });
   });
 
@@ -460,6 +465,7 @@ const genGloomhaven = () => {
       x: 350 + 20 * index,
       y: 700,
       width: 20,
+      layer: 2,
     });
   });
 
@@ -481,6 +487,7 @@ const genGloomhaven = () => {
     x: 0,
     y: 100,
     width: 300,
+    layer: -1,
   });
 
   const ailments = [
@@ -501,79 +508,82 @@ const genGloomhaven = () => {
         x: 0 + 30 * index,
         y: 100 + 40 * rowIndex,
         width: 30,
+        layer: 1,
       });
     });
+  });
 
-    const battleGoals = [
-      'aggressor',
-      'diehard',
-      'dynamo',
-      'executioner',
-      'explorer',
-      'fasthealer',
-      'hoarder',
-      'hunter',
-      'indigent',
-      'layabout',
-      'masochist',
-      'neutralizer',
-      'opener',
-      'pacifist',
-      'plunderer',
-      'professional',
-      'protector',
-      'purist',
-      'sadist',
-      'scrambler',
-      'straggler',
-      'streamliner',
-      'workhorse',
-      'zealot',
-    ];
-    battleGoals.forEach((battleGoalName, index) => {
-      items.push({
-        type: 'image',
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/battle-goals/${battleGoalName}.png`,
-        backContent:
-          'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/battle-goals/battlegoal-back.png',
-        x: 200 + 1 * index,
-        y: 0 + 1 * index,
-        flipped: true,
-        width: 30,
-      });
+  const battleGoals = [
+    'aggressor',
+    'diehard',
+    'dynamo',
+    'executioner',
+    'explorer',
+    'fasthealer',
+    'hoarder',
+    'hunter',
+    'indigent',
+    'layabout',
+    'masochist',
+    'neutralizer',
+    'opener',
+    'pacifist',
+    'plunderer',
+    'professional',
+    'protector',
+    'purist',
+    'sadist',
+    'scrambler',
+    'straggler',
+    'streamliner',
+    'workhorse',
+    'zealot',
+  ];
+  battleGoals.forEach((battleGoalName, index) => {
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/battle-goals/${battleGoalName}.png`,
+      backContent:
+        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/battle-goals/battlegoal-back.png',
+      x: 200 + 1 * index,
+      y: 0 + 1 * index,
+      flipped: true,
+      width: 30,
     });
+  });
 
-    const characterItems = [
-      'boots-of-striding',
-      'cloak-of-invisibility',
-      'eagle-eye-goggles',
-      'heater-shield',
-      'hide-armor',
-      'iron-helmet',
-      'leather-armor',
-      'minor-healing-potion',
-      'minor-power-potion',
-      'minor-stamina-potion',
-      'piercing-bow',
-      'poison-dagger',
-      'war-hammer',
-      'winged-shoes',
-    ];
-    characterItems.forEach((itemName, index) => {
-      items.push({
-        type: 'image',
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/items/1-14/${itemName}.png`,
-        x: 1500 + 40 * index,
-        y: 1500,
-        flipped: true,
-        width: 40,
-      });
+  const characterItems = [
+    'boots-of-striding',
+    'cloak-of-invisibility',
+    'eagle-eye-goggles',
+    'heater-shield',
+    'hide-armor',
+    'iron-helmet',
+    'leather-armor',
+    'minor-healing-potion',
+    'minor-power-potion',
+    'minor-stamina-potion',
+    'piercing-bow',
+    'poison-dagger',
+    'war-hammer',
+    'winged-shoes',
+  ];
+
+  characterItems.forEach((itemName, index) => {
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/items/1-14/${itemName}.png`,
+      x: 1500 + 40 * index,
+      y: 1500,
+      flipped: true,
+      width: 40,
     });
   });
 
   return {
     items,
     availableItems: box,
+    url: `${URL_PREFIX}/gloomhaven.json`,
     board: { size: 3000, scale: 0.5, name: 'gloomhaven' },
   };
 };
