@@ -5,24 +5,38 @@ const genGloomhavenBox = () => {
 
   // map-tiles
 
-  Array.from('abcdefghijkl').forEach((l) => {
-    items.push({
-      type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}1a.png`,
-      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}1b.png`,
-      text: `${l}1a`,
-      backText: `${l}1b`,
-      label: `Tiles ${l}1a / ${l}1b`,
-      groupId: 'map-tiles',
-    });
-    items.push({
-      type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}2a.png`,
-      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}2b.png`,
-      text: `${l}2a`,
-      backText: `${l}2b`,
-      label: `Tiles ${l}2a / ${l}2b`,
-      groupId: 'map-tiles',
+  [
+    'a4',
+    'b4',
+    'c2',
+    'd2',
+    'e1',
+    'f1',
+    'g2',
+    'h3',
+    'i2',
+    'j2',
+    'k2',
+    'l3',
+    'm1',
+    'n1',
+  ].forEach((ln) => {
+    const [l, n] = Array.from(ln);
+    [...Array(n).keys()].forEach((y) => {
+      items.push({
+        type: 'image',
+        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${
+          y + 1
+        }a.png`,
+        backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${
+          y + 1
+        }b.png`,
+        text: `${l}${y}a`,
+        backText: `${l}${y}b`,
+        layer: -1,
+        x: 558,
+        y: 80,
+      });
     });
   });
 
@@ -37,6 +51,7 @@ const genGloomhavenBox = () => {
     width: 300,
     label: 'Brute mat-board',
     groupId: 'brute',
+    layer: -1,
   });
 
   items.push({
@@ -48,6 +63,7 @@ const genGloomhavenBox = () => {
     width: 300,
     label: 'Spellweaver mat-board',
     groupId: 'spellweaver',
+    layer: -1,
   });
 
   items.push({
@@ -334,6 +350,7 @@ const genGloomhavenBox = () => {
     width: 300,
     label: 'Element matboard',
     groupId: 'elements',
+    layer: -1,
   });
 
   const ailments = [
@@ -346,6 +363,7 @@ const genGloomhavenBox = () => {
     'confusion',
     'poison',
   ];
+
   ailments.forEach((ailmentName) => {
     items.push({
       type: 'image',
@@ -353,6 +371,7 @@ const genGloomhavenBox = () => {
       width: 30,
       label: `${ailmentName} icon`,
       groupId: 'ailments',
+      layer: 1,
     });
   });
 
@@ -382,6 +401,7 @@ const genGloomhavenBox = () => {
     'workhorse',
     'zealot',
   ];
+
   battleGoals.forEach((battleGoalName) => {
     items.push({
       type: 'image',
