@@ -131,7 +131,7 @@ const genGloomhaven = () => {
     items.push({
       type: 'image',
       content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: '/games/gloom/attackback.png',
+      backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
       x: 300,
@@ -144,7 +144,7 @@ const genGloomhaven = () => {
     items.push({
       type: 'image',
       content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: '/games/gloom/attackback.png',
+      backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
       x: 300,
@@ -157,7 +157,7 @@ const genGloomhaven = () => {
     items.push({
       type: 'image',
       content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/monster/am-m-${number}.png`,
-      backContent: '/games/gloom/attackback.png',
+      backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
       x: 1000,
