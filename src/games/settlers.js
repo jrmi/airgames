@@ -317,6 +317,19 @@ const genGame = () => {
     layer: -1,
   });
 
+  // Score tokens
+
+  Array.from('ABCDEFGHIJKLMNOPQR').forEach((l, v) => {
+    items.push({
+      type: 'image',
+      content: URL_PREFIX + `settlers/token_front_${l}.png`,
+      backContent: URL_PREFIX + `settlers/token_back_${l}.png`,
+      width: 80,
+      x: 100 + 40 * v,
+      y: 1700,
+    });
+  });
+
   // Tokens
 
   [...Array(5)].forEach((_, v) => {
