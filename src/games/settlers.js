@@ -164,6 +164,8 @@ const genGame = () => {
       x: 100 - v,
       y: 1000 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
   [...Array(3)].forEach((_, v) => {
@@ -175,6 +177,8 @@ const genGame = () => {
       x: 400 - v,
       y: 1000 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
   [...Array(4)].forEach((_, v) => {
@@ -186,6 +190,8 @@ const genGame = () => {
       x: 700 - v,
       y: 1000 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
   [...Array(4)].forEach((_, v) => {
@@ -197,6 +203,8 @@ const genGame = () => {
       x: 1000 - v,
       y: 1000 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
   [...Array(4)].forEach((_, v) => {
@@ -208,6 +216,8 @@ const genGame = () => {
       x: 1300 - v,
       y: 1000 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
 
@@ -219,6 +229,8 @@ const genGame = () => {
     x: 1600,
     y: 1000,
     rotation: 30,
+    actions: ['rotate60'],
+    layer: -1,
   });
 
   [...Array(9)].forEach((_, v) => {
@@ -230,6 +242,8 @@ const genGame = () => {
       x: 1900 - v,
       y: 1000 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
 
@@ -242,6 +256,8 @@ const genGame = () => {
       x: 300 - v,
       y: 1400 - v,
       rotation: 30,
+      actions: ['rotate60'],
+      layer: -1,
     });
   });
 
@@ -253,6 +269,8 @@ const genGame = () => {
     x: 600,
     y: 1400,
     rotation: 30,
+    actions: ['rotate60'],
+    layer: -1,
   });
   items.push({
     type: 'image',
@@ -262,6 +280,8 @@ const genGame = () => {
     x: 900,
     y: 1400,
     rotation: 30,
+    actions: ['rotate60'],
+    layer: -1,
   });
   items.push({
     type: 'image',
@@ -271,6 +291,8 @@ const genGame = () => {
     x: 1200,
     y: 1400,
     rotation: 30,
+    actions: ['rotate60'],
+    layer: -1,
   });
   items.push({
     type: 'image',
@@ -280,6 +302,8 @@ const genGame = () => {
     x: 1500,
     y: 1400,
     rotation: 30,
+    actions: ['rotate60'],
+    layer: -1,
   });
   items.push({
     type: 'image',
@@ -289,6 +313,21 @@ const genGame = () => {
     x: 1800,
     y: 1400,
     rotation: 30,
+    actions: ['rotate60'],
+    layer: -1,
+  });
+
+  // Score tokens
+
+  Array.from('ABCDEFGHIJKLMNOPQR').forEach((l, v) => {
+    items.push({
+      type: 'image',
+      content: URL_PREFIX + `settlers/token_front_${l}.png`,
+      backContent: URL_PREFIX + `settlers/token_back_${l}.png`,
+      width: 80,
+      x: 100 + 40 * v,
+      y: 1700,
+    });
   });
 
   // Tokens
@@ -321,6 +360,7 @@ const genGame = () => {
       height: 100,
       x: 700 + 40 * v,
       y: 1800,
+      actions: ['rotate30'],
     });
   });
 
@@ -352,6 +392,7 @@ const genGame = () => {
       height: 100,
       x: 700 + 40 * v,
       y: 2050,
+      actions: ['rotate45'],
     });
   });
 
@@ -383,6 +424,7 @@ const genGame = () => {
       height: 100,
       x: 700 + 40 * v,
       y: 2250,
+      actions: ['rotate45'],
     });
   });
 
@@ -414,6 +456,7 @@ const genGame = () => {
       height: 100,
       x: 700 + 40 * v,
       y: 2450,
+      actions: ['rotate45'],
     });
   });
 
