@@ -1,4 +1,5 @@
 import slugify from 'slugify';
+import { URL_PREFIX } from '../config';
 
 const genGloomhavenBox = () => {
   const items = [];
@@ -91,7 +92,7 @@ const genGloomhavenBox = () => {
     items.push({
       type: 'image',
       content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: '/games/gloom/attackback.png',
+      backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
       label: `Player Attack modifier am-p-${number}`,
@@ -104,7 +105,7 @@ const genGloomhavenBox = () => {
     items.push({
       type: 'image',
       content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/monster/am-m-${number}.png`,
-      backContent: '/games/gloom/attackback.png',
+      backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
       label: `Monster Attack modifier am-p-${number}`,
