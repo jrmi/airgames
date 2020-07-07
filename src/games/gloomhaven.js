@@ -45,22 +45,7 @@ const genGloomhaven = () => {
 
   // map-tiles
 
-  [
-    'a4',
-    'b4',
-    'c2',
-    'd2',
-    'e1',
-    'f1',
-    'g2',
-    'h3',
-    'i2',
-    'j2',
-    'k2',
-    'l3',
-    'm1',
-    'n1',
-  ].forEach((ln) => {
+  ['g2', 'i2', 'l3'].forEach((ln) => {
     const [l, n] = Array.from(ln);
     [...Array(n).keys()].forEach((y) => {
       items.push({
@@ -166,7 +151,7 @@ const genGloomhaven = () => {
   });
 
   // monster tokens
-  [...Array(10).keys()].forEach((_, index) => {
+  [...Array(2).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
       content:
@@ -224,7 +209,7 @@ const genGloomhaven = () => {
   });
 
   // Overlay tokens
-  [...Array(20).keys()].forEach((_, index) => {
+  [...Array(5).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
       content:
@@ -287,19 +272,6 @@ const genGloomhaven = () => {
     x: 100,
     y: 900,
     width: 50,
-  });
-
-  [...Array(3).keys()].forEach(() => {
-    [...Array(9).keys()].forEach((_, index) => {
-      items.push({
-        type: 'counter',
-        label: `Monster #${index + 1}`,
-        value: 0,
-        x: 200 + 10 * index,
-        y: 900 + 10 * index,
-        width: 50,
-      });
-    });
   });
 
   items.push({
