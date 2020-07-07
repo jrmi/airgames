@@ -23,66 +23,19 @@ const genGloomhavenBox = () => {
     'n1',
   ].forEach((ln) => {
     const [l, n] = Array.from(ln);
-    [...Array(n).keys()].forEach((y) => {
+    [...Array(parseInt(n)).keys()].forEach((y) => {
+      const incrY = y + 1;
       items.push({
         type: 'image',
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${
-          y + 1
-        }a.png`,
-        backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${
-          y + 1
-        }b.png`,
-        text: `${l}${y}a`,
-        backText: `${l}${y}b`,
+        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${incrY}a.png`,
+        backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${incrY}b.png`,
+        text: `${l}${incrY}a`,
+        backText: `${l}${incrY}b`,
         layer: -1,
-        x: 558,
-        y: 80,
+        groupId: 'scenario-tiles',
+        label: `Tiles ${l}${incrY}a / ${l}${incrY}b`,
       });
     });
-  });
-
-  // character-mats
-
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/brute.png',
-    backContent:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/brute-back.png',
-    width: 300,
-    label: 'Brute mat-board',
-    groupId: 'brute',
-    layer: -1,
-  });
-
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/spellweaver.png',
-    backContent:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/spellweaver-back.png',
-    width: 300,
-    label: 'Spellweaver mat-board',
-    groupId: 'spellweaver',
-    layer: -1,
-  });
-
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/brute-perks.png',
-    width: 300,
-    label: 'Brute perks-board',
-    groupId: 'brute',
-  });
-
-  items.push({
-    type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/spellweaver-perks.png',
-    width: 300,
-    label: 'Spellweaver perks-board',
-    groupId: 'spellweaver',
   });
 
   // Attack modifiers
@@ -210,129 +163,133 @@ const genGloomhavenBox = () => {
 
   // Character ability cards
   const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-  const brute = {
-    code: 'BR',
-    abilityCards: {
-      'level-1': [
-        'eye-for-an-eye',
-        'grab-and-go',
-        'leaping-cleave',
-        'overwhelming-assault',
-        'provoking-roar',
-        'shield-bash',
-        'spare-dagger',
-        'sweeping-blow',
-        'trample',
-        'warding-strength',
-      ],
-      'level-X': ['balanced-measure', 'skewer', 'wall-of-doom'],
-      'level-2': ['fatal-advance', 'juggernaut'],
-      'level-3': ['brute-force', 'hook-and-chain'],
-      'level-4': ['devastating-hack', 'unstoppable-charge'],
-      'level-5': ['skirmishing-maneuver', 'whirlwind'],
-      'level-6': ['immovable-phalanx', 'quietus'],
-      'level-7': ['crippling-offensive', 'defensive-tactics'],
-      'level-8': ['frenzied-onslaught', 'selfish-retribution'],
-      'level-9': ['face-your-end', 'king-of-the-hill'],
+  const characters = [
+    {
+      name: 'brute',
+      code: 'BR',
+      abilityCards: {
+        'level-1': [
+          'eye-for-an-eye',
+          'grab-and-go',
+          'leaping-cleave',
+          'overwhelming-assault',
+          'provoking-roar',
+          'shield-bash',
+          'spare-dagger',
+          'sweeping-blow',
+          'trample',
+          'warding-strength',
+        ],
+        'level-X': ['balanced-measure', 'skewer', 'wall-of-doom'],
+        'level-2': ['fatal-advance', 'juggernaut'],
+        'level-3': ['brute-force', 'hook-and-chain'],
+        'level-4': ['devastating-hack', 'unstoppable-charge'],
+        'level-5': ['skirmishing-maneuver', 'whirlwind'],
+        'level-6': ['immovable-phalanx', 'quietus'],
+        'level-7': ['crippling-offensive', 'defensive-tactics'],
+        'level-8': ['frenzied-onslaught', 'selfish-retribution'],
+        'level-9': ['face-your-end', 'king-of-the-hill'],
+      },
+      nbAttackModifiers: 22,
     },
-    backCard:
-      'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/BR/br-back.png',
-    icon:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/brute-icon.png',
-    token:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/brute-character-token.png',
-  };
+    {
+      name: 'spellweaver',
+      code: 'SW',
+      abilityCards: {
+        'level-1': [
+          'fire-orbs',
+          'flame-strike',
+          'freezing-nova',
+          'frost-armor',
+          'impaling-eruption',
+          'mana-bolt',
+          'reviving-ether',
+          'ride-the-wind',
+        ],
+        'level-X': ['crackling-air', 'hardened-spikes', 'aid-from-the-ether'],
+        'level-2': ['flashing-burst', 'icy-blast'],
+        'level-3': ['elemental-aid', 'cold-fire'],
+        'level-4': ['forked-beam', 'spirit-of-doom'],
+        'level-5': ['engulfed-in-flames', 'chromatic-explosion'],
+        'level-6': ['frozen-night', 'living-torch'],
+        'level-7': ['stone-fists', 'twin-restoration'],
+        'level-8': ['zephyr-wings', 'cold-front'],
+        'level-9': ['inferno', 'black-hole'],
+      },
+      nbAttackModifiers: 18,
+    },
+  ];
 
-  levels.forEach((level) => {
-    brute.abilityCards[`level-${level}`].forEach((abilityName) => {
+  characters.forEach((character) => {
+    // Character cards
+    levels.forEach((level) => {
+      character.abilityCards[`level-${level}`].forEach((abilityName) => {
+        items.push({
+          type: 'image',
+          content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${character.code}/${abilityName}.png`,
+          backContent: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${
+            character.code
+          }/${character.code.toLowerCase()}-back.png`,
+          width: 100,
+          label: `Level ${level} card: ${abilityName}`,
+          groupId: `${character.name}`,
+        });
+      });
+    });
+
+    // Character icons/tokens
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/${character.name}-icon.png`,
+      width: 40,
+      label: `${character.name} icon`,
+      groupId: `${character.name}`,
+    });
+
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/${character.name}-character-token.png`,
+      width: 20,
+      label: `${character.name} token`,
+      groupId: `${character.name}`,
+    });
+
+    // Character mats
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/${character.name}.png`,
+      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/${character.name}-back.png`,
+      width: 300,
+      label: `${character.name} mat-board`,
+      groupId: `${character.name}`,
+      layer: -1,
+    });
+
+    items.push({
+      type: 'image',
+      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/${character.name}-perks.png`,
+      width: 300,
+      label: `${character.name} perks-board`,
+      groupId: `${character.name}`,
+    });
+
+    // Character-specific attack modifiers
+    [...Array(character.nbAttackModifiers).keys()].forEach((_, index) => {
+      const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
       items.push({
         type: 'image',
-        content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${brute.code}/${abilityName}.png`,
-        backContent: `${brute.backCard}`,
+        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/${
+          character.code
+        }/am-${character.code.toLowerCase()}-${number}.png`,
+        backContent: URL_PREFIX + 'gloom/attackback.png',
         width: 100,
-        label: `Level ${level} card: ${abilityName}`,
-        groupId: 'brute',
+        label: `${character.name} attack modifier ${number}`,
+        groupId: `${character.name}`,
       });
     });
   });
 
-  items.push({
-    type: 'image',
-    content: brute.icon,
-    width: 40,
-    label: 'Brute icon',
-    groupId: 'brute',
-  });
-
-  items.push({
-    type: 'image',
-    content: brute.token,
-    width: 20,
-    label: 'Brute token',
-    groupId: 'brute',
-  });
-
-  const spellWeaver = {
-    code: 'SW',
-    abilityCards: {
-      'level-1': [
-        'fire-orbs',
-        'flame-strike',
-        'freezing-nova',
-        'frost-armor',
-        'impaling-eruption',
-        'mana-bolt',
-        'reviving-ether',
-        'ride-the-wind',
-      ],
-      'level-X': ['crackling-air', 'hardened-spikes', 'aid-from-the-ether'],
-      'level-2': ['flashing-burst', 'icy-blast'],
-      'level-3': ['elemental-aid', 'cold-fire'],
-      'level-4': ['forked-beam', 'spirit-of-doom'],
-      'level-5': ['engulfed-in-flames', 'chromatic-explosion'],
-      'level-6': ['frozen-night', 'living-torch'],
-      'level-7': ['stone-fists', 'twin-restoration'],
-      'level-8': ['zephyr-wings', 'cold-front'],
-      'level-9': ['inferno', 'black-hole'],
-    },
-    backCard:
-      'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/SW/sw-back.png',
-    icon:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/spellweaver-icon.png',
-    token:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/spellweaver-character-token.png',
-  };
-
-  levels.forEach((level) => {
-    spellWeaver.abilityCards[`level-${level}`].forEach((abilityName) => {
-      items.push({
-        type: 'image',
-        content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${spellWeaver.code}/${abilityName}.png`,
-        backContent: `${spellWeaver.backCard}`,
-        width: 100,
-        label: `Level ${level} card: ${abilityName}`,
-        groupId: 'spellweaver',
-      });
-    });
-  });
-
-  items.push({
-    type: 'image',
-    content: spellWeaver.icon,
-    width: 40,
-    label: 'Spellweaver icon',
-    groupId: 'spellweaver',
-  });
-
-  items.push({
-    type: 'image',
-    content: spellWeaver.token,
-    width: 20,
-    label: 'Spellweaver token',
-    groupId: 'spellweaver',
-  });
-
+  // Elements
   const elements = ['ice', 'air', 'earth', 'fire', 'dark', 'light'];
   elements.forEach((elementName) => {
     items.push({
@@ -354,6 +311,7 @@ const genGloomhavenBox = () => {
     layer: -1,
   });
 
+  // Ailments (combat statuses)
   const ailments = [
     'reinforcement',
     'disarm',
