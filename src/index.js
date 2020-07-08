@@ -1,6 +1,6 @@
 import tiktok from './games/tiktok';
 import settlers from './games/settlers';
-import gloomhaven from './games/gloomhaven';
+import gloomhaven from './games/gloomhaven/setup';
 import cards from './games/cards';
 import fs from 'fs';
 import { ncp } from 'ncp';
