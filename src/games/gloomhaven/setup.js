@@ -1,5 +1,5 @@
-import box from './gloomhaven-box';
-import { URL_PREFIX } from '../config';
+import box from './box';
+import { URL_PREFIX, EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
 
 const genGloomhaven = () => {
   const items = [];
@@ -7,10 +7,10 @@ const genGloomhaven = () => {
   [...Array(7).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-ability-cards/archer/ma-ar-${
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/archer/ma-ar-${
         index + 1
       }.png`,
-      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-ability-cards/archer/ma-ar-back.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/archer/ma-ar-back.png`,
       width: 100,
       x: 200,
       y: 200,
@@ -20,10 +20,10 @@ const genGloomhaven = () => {
   [...Array(7).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-ability-cards/guard/ma-gu-${
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/guard/ma-gu-${
         index + 1
       }.png`,
-      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-ability-cards/guard/ma-gu-back.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/guard/ma-gu-back.png`,
       width: 100,
       x: 200,
       y: 300,
@@ -33,10 +33,10 @@ const genGloomhaven = () => {
   [...Array(7).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-ability-cards/living-bones/ma-lb-${
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/living-bones/ma-lb-${
         index + 1
       }.png`,
-      backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-ability-cards/living-bones/ma-lb-back.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/living-bones/ma-lb-back.png`,
       width: 100,
       x: 200,
       y: 500,
@@ -50,12 +50,8 @@ const genGloomhaven = () => {
     [...Array(n).keys()].forEach((y) => {
       items.push({
         type: 'image',
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${
-          y + 1
-        }a.png`,
-        backContent: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/map-tiles/${l}${
-          y + 1
-        }b.png`,
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/map-tiles/${l}${y + 1}a.png`,
+        backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/map-tiles/${l}${y + 1}b.png`,
         text: `${l}${y}a`,
         backText: `${l}${y}b`,
         layer: -1,
@@ -69,10 +65,8 @@ const genGloomhaven = () => {
 
   items.push({
     type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/brute.png',
-    backContent:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/brute-back.png',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/brute.png`,
+    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/brute-back.png`,
     width: 300,
     layer: -1,
     x: 500,
@@ -81,10 +75,8 @@ const genGloomhaven = () => {
 
   items.push({
     type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/spellweaver.png',
-    backContent:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-mats/spellweaver-back.png',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/spellweaver.png`,
+    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/spellweaver-back.png`,
     width: 300,
     layer: -1,
     x: 500,
@@ -93,8 +85,7 @@ const genGloomhaven = () => {
 
   items.push({
     type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/brute-perks.png',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-perks/brute-perks.png`,
     width: 300,
     x: 1000,
     y: 500,
@@ -102,8 +93,7 @@ const genGloomhaven = () => {
 
   items.push({
     type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-perks/spellweaver-perks.png',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-perks/spellweaver-perks.png`,
     width: 300,
     x: 1000,
     y: 700,
@@ -115,7 +105,7 @@ const genGloomhaven = () => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/player/am-p-${number}.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
       backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
@@ -128,7 +118,7 @@ const genGloomhaven = () => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/player/am-p-${number}.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
       backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
@@ -141,7 +131,7 @@ const genGloomhaven = () => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/attack-modifiers/base/monster/am-m-${number}.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/monster/am-m-${number}.png`,
       backContent: URL_PREFIX + 'gloom/attackback.png',
       width: 100,
       flipped: true,
@@ -154,42 +144,39 @@ const genGloomhaven = () => {
   [...Array(2).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/bandit-guard.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/bandit-guard.png`,
       x: 1400 + 60 * index,
       y: 0,
       width: 60,
       text: `${index}`,
       overlay: {
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/${
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${
           index < 7 ? 'normal' : 'elite'
         }-monster-overlay.svg`,
       },
     });
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/bandit-archer.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/bandit-archer.png`,
       x: 1400 + 60 * index,
       y: 50,
       width: 60,
       text: `${index}`,
       overlay: {
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/${
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${
           index < 7 ? 'normal' : 'elite'
         }-monster-overlay.svg`,
       },
     });
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/living-bones.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/living-bones.png`,
       x: 1400 + 60 * index,
       y: 100,
       width: 60,
       text: `${index}`,
       overlay: {
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/monster-tokens/${
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${
           index < 7 ? 'normal' : 'elite'
         }-monster-overlay.svg`,
       },
@@ -201,7 +188,7 @@ const genGloomhaven = () => {
   monsters.forEach((monsterName, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/monster-stat-cards/${monsterName}-0.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/${monsterName}-0.png`,
       x: 1300 + 200 * index,
       y: 300,
       width: 200,
@@ -212,8 +199,7 @@ const genGloomhaven = () => {
   [...Array(5).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/overlay-tokens/treasures/coin-1.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/treasures/coin-1.png`,
       x: 1100 + 20 * index,
       y: 200,
       width: 50,
@@ -276,8 +262,7 @@ const genGloomhaven = () => {
 
   items.push({
     type: 'image',
-    content:
-      'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/overlay-tokens/treasures/treasure.png',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/treasures/treasure.png`,
     x: 1100,
     y: 250,
     width: 50,
@@ -286,8 +271,7 @@ const genGloomhaven = () => {
   [...Array(2).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/overlay-tokens/doors/stone-door.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/doors/stone-door.png`,
       x: 1100 + 20 * index,
       y: 300,
       width: 50,
@@ -297,8 +281,7 @@ const genGloomhaven = () => {
   [...Array(2).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/overlay-tokens/traps/spike-pit-trap.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/traps/spike-pit-trap.png`,
       x: 1100 + 20 * index,
       y: 350,
       width: 50,
@@ -308,8 +291,7 @@ const genGloomhaven = () => {
   [...Array(2).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
-      content:
-        'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/overlay-tokens/obstacles/table.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/obstacles/table.png`,
       x: 1100 + 20 * index,
       y: 400,
       width: 50,
@@ -342,18 +324,15 @@ const genGloomhaven = () => {
       'level-8': ['frenzied-onslaught', 'selfish-retribution'],
       'level-9': ['face-your-end', 'king-of-the-hill'],
     },
-    backCard:
-      'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/BR/br-back.png',
-    icon:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/brute-icon.png',
-    token:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/brute-character-token.png',
+    backCard: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/BR/br-back.png`,
+    icon: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/brute-icon.png`,
+    token: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/brute-character-token.png`,
   };
 
   brute.abilityCards['level-1'].forEach((abilityName, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${brute.code}/${abilityName}.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${brute.code}/${abilityName}.png`,
       backContent: `${brute.backCard}`,
       x: 0 + 100 * index,
       y: 1000,
@@ -402,18 +381,15 @@ const genGloomhaven = () => {
       'level-8': ['zephyr-wings', 'cold-front'],
       'level-9': ['inferno', 'black-hole'],
     },
-    backCard:
-      'https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/SW/sw-back.png',
-    icon:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/spellweaver-icon.png',
-    token:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/character-icons/spellweaver-character-token.png',
+    backCard: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/SW/sw-back.png`,
+    icon: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/spellweaver-icon.png`,
+    token: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/spellweaver-character-token.png`,
   };
 
   spellWeaver.abilityCards['level-1'].forEach((abilityName, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com//romgar/gloomhaven/master/images/character-ability-cards/${spellWeaver.code}/${abilityName}.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${spellWeaver.code}/${abilityName}.png`,
       backContent: `${spellWeaver.backCard}`,
       x: 0 + 100 * index,
       y: 1150,
@@ -445,7 +421,7 @@ const genGloomhaven = () => {
   elements.forEach((elementName, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/elements/${elementName}-element.svg`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/${elementName}-element.svg`,
       x: 0 + 30 * index,
       y: 0,
       width: 30,
@@ -454,8 +430,7 @@ const genGloomhaven = () => {
 
   items.push({
     type: 'image',
-    content:
-      'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/elements/element-matboard.png',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/element-matboard.png`,
     x: 0,
     y: 100,
     width: 300,
@@ -476,7 +451,7 @@ const genGloomhaven = () => {
     ailments.forEach((ailmentName, index) => {
       items.push({
         type: 'image',
-        content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/ailments/${ailmentName}.png`,
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/ailments/${ailmentName}.png`,
         x: 0 + 30 * index,
         y: 100 + 40 * rowIndex,
         width: 30,
@@ -514,9 +489,8 @@ const genGloomhaven = () => {
   battleGoals.forEach((battleGoalName, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/battle-goals/${battleGoalName}.png`,
-      backContent:
-        'https://raw.githubusercontent.com/romgar/gloomhaven/master/images/battle-goals/battlegoal-back.png',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/battle-goals/${battleGoalName}.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/battle-goals/battlegoal-back.png`,
       x: 200 + 1 * index,
       y: 0 + 1 * index,
       flipped: true,
@@ -544,7 +518,7 @@ const genGloomhaven = () => {
   characterItems.forEach((itemName, index) => {
     items.push({
       type: 'image',
-      content: `https://raw.githubusercontent.com/romgar/gloomhaven/master/images/items/1-14/${itemName}.png`,
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/items/1-14/${itemName}.png`,
       x: 1500 + 40 * index,
       y: 1500,
       flipped: true,
