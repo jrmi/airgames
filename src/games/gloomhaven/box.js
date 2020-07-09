@@ -58,6 +58,26 @@ const genGloomhavenBox = () => {
 
   // Attack modifiers
 
+  items.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/curse-card.jpg`,
+    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+    width: 100,
+    flipped: true,
+    label: `Curse Attack modifier`,
+    groupId: 'attack-modifiers',
+  });
+
+  items.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/benediction-card.jpg`,
+    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+    width: 100,
+    flipped: true,
+    label: `Benediction Attack modifier`,
+    groupId: 'attack-modifiers',
+  });
+
   [...Array(19).keys()].forEach((_, index) => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
