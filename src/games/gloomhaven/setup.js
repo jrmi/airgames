@@ -4,7 +4,7 @@ import { URL_PREFIX, EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
 const genGloomhaven = () => {
   const items = [];
 
-  [...Array(7).keys()].forEach((_, index) => {
+  [...Array(4).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/archer/ma-ar-${
@@ -17,7 +17,7 @@ const genGloomhaven = () => {
     });
   });
 
-  [...Array(7).keys()].forEach((_, index) => {
+  [...Array(4).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/guard/ma-gu-${
@@ -30,7 +30,7 @@ const genGloomhaven = () => {
     });
   });
 
-  [...Array(7).keys()].forEach((_, index) => {
+  [...Array(4).keys()].forEach((_, index) => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/living-bones/ma-lb-${
@@ -437,29 +437,6 @@ const genGloomhaven = () => {
     layer: -1,
   });
 
-  const ailments = [
-    'reinforcement',
-    'disarm',
-    'immobilise',
-    'wound',
-    'stun',
-    'invisible',
-    'confusion',
-    'poison',
-  ];
-  [...Array(5).keys()].forEach((_, rowIndex) => {
-    ailments.forEach((ailmentName, index) => {
-      items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/ailments/${ailmentName}.png`,
-        x: 0 + 30 * index,
-        y: 100 + 40 * rowIndex,
-        width: 30,
-        layer: 1,
-      });
-    });
-  });
-
   const battleGoals = [
     'aggressor',
     'diehard',
@@ -495,34 +472,6 @@ const genGloomhaven = () => {
       y: 0 + 1 * index,
       flipped: true,
       width: 30,
-    });
-  });
-
-  const characterItems = [
-    'boots-of-striding',
-    'cloak-of-invisibility',
-    'eagle-eye-goggles',
-    'heater-shield',
-    'hide-armor',
-    'iron-helmet',
-    'leather-armor',
-    'minor-healing-potion',
-    'minor-power-potion',
-    'minor-stamina-potion',
-    'piercing-bow',
-    'poison-dagger',
-    'war-hammer',
-    'winged-shoes',
-  ];
-
-  characterItems.forEach((itemName, index) => {
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/items/1-14/${itemName}.png`,
-      x: 1500 + 40 * index,
-      y: 1500,
-      flipped: true,
-      width: 40,
     });
   });
 
