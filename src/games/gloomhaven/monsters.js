@@ -272,7 +272,7 @@ export const genMonsters = () => {
       )}-0.png`,
       width: 200,
       label: `${monster.name}`,
-      groupId: `monster-stats-cards`,
+      groupId: `monster-stat-cards`,
     });
 
     // monster ability cards
@@ -292,6 +292,14 @@ export const genMonsters = () => {
         groupId: `monster-ability-cards`,
       });
     });
+  });
+
+  items.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/monster-stat-sleeve.png`,
+    width: 200,
+    label: `Monster stats sleeve`,
+    groupId: `monster-stat-cards`,
   });
 
   return items;

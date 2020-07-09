@@ -1,6 +1,7 @@
 import slugify from 'slugify';
-import equipmentListing from './equipment';
+import { genEquipment } from './equipment';
 import { genMonsters } from './monsters';
+import { genCharacters } from './characters';
 import { URL_PREFIX, EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
 
 const lowerSlug = function (text) {
@@ -9,6 +10,18 @@ const lowerSlug = function (text) {
 
 const genGloomhavenBox = () => {
   const items = [];
+
+  // monster section
+  const monsters = genMonsters();
+  monsters.forEach((item) => items.push(item));
+
+  // character section
+  const characters = genCharacters();
+  characters.forEach((item) => items.push(item));
+
+  // monster section
+  const equipment = genEquipment();
+  equipment.forEach((item) => items.push(item));
 
   // map-tiles
   [
@@ -70,10 +83,6 @@ const genGloomhavenBox = () => {
       groupId: 'attack-modifiers',
     });
   });
-
-  // monster section
-  const monsters = genMonsters();
-  monsters.forEach((monster) => items.push(monster));
 
   // Counters
   items.push({
@@ -163,134 +172,6 @@ const genGloomhavenBox = () => {
     });
   });
 
-  // Characters
-  const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const characters = [
-    {
-      name: 'brute',
-      code: 'BR',
-      abilityCards: {
-        'level-1': [
-          'eye-for-an-eye',
-          'grab-and-go',
-          'leaping-cleave',
-          'overwhelming-assault',
-          'provoking-roar',
-          'shield-bash',
-          'spare-dagger',
-          'sweeping-blow',
-          'trample',
-          'warding-strength',
-        ],
-        'level-X': ['balanced-measure', 'skewer', 'wall-of-doom'],
-        'level-2': ['fatal-advance', 'juggernaut'],
-        'level-3': ['brute-force', 'hook-and-chain'],
-        'level-4': ['devastating-hack', 'unstoppable-charge'],
-        'level-5': ['skirmishing-maneuver', 'whirlwind'],
-        'level-6': ['immovable-phalanx', 'quietus'],
-        'level-7': ['crippling-offensive', 'defensive-tactics'],
-        'level-8': ['frenzied-onslaught', 'selfish-retribution'],
-        'level-9': ['face-your-end', 'king-of-the-hill'],
-      },
-      nbAttackModifiers: 22,
-    },
-    {
-      name: 'spellweaver',
-      code: 'SW',
-      abilityCards: {
-        'level-1': [
-          'fire-orbs',
-          'flame-strike',
-          'freezing-nova',
-          'frost-armor',
-          'impaling-eruption',
-          'mana-bolt',
-          'reviving-ether',
-          'ride-the-wind',
-        ],
-        'level-X': ['crackling-air', 'hardened-spikes', 'aid-from-the-ether'],
-        'level-2': ['flashing-burst', 'icy-blast'],
-        'level-3': ['elemental-aid', 'cold-fire'],
-        'level-4': ['forked-beam', 'spirit-of-doom'],
-        'level-5': ['engulfed-in-flames', 'chromatic-explosion'],
-        'level-6': ['frozen-night', 'living-torch'],
-        'level-7': ['stone-fists', 'twin-restoration'],
-        'level-8': ['zephyr-wings', 'cold-front'],
-        'level-9': ['inferno', 'black-hole'],
-      },
-      nbAttackModifiers: 18,
-    },
-  ];
-
-  characters.forEach((character) => {
-    // Character cards
-    levels.forEach((level) => {
-      character.abilityCards[`level-${level}`].forEach((abilityName) => {
-        items.push({
-          type: 'image',
-          content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${character.code}/${abilityName}.png`,
-          backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${
-            character.code
-          }/${character.code.toLowerCase()}-back.png`,
-          width: 100,
-          label: `Level ${level} card: ${abilityName}`,
-          groupId: `${character.name}`,
-        });
-      });
-    });
-
-    // Character icons/tokens
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
-      width: 40,
-      label: `${character.name} icon`,
-      groupId: `${character.name}`,
-    });
-
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-character-token.png`,
-      width: 20,
-      label: `${character.name} token`,
-      groupId: `${character.name}`,
-    });
-
-    // Character mats
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/${character.name}.png`,
-      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/${character.name}-back.png`,
-      width: 300,
-      label: `${character.name} mat-board`,
-      groupId: `${character.name}`,
-      layer: -1,
-    });
-
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-perks/${character.name}-perks.png`,
-      width: 300,
-      label: `${character.name} perks-board`,
-      groupId: `${character.name}`,
-    });
-
-    // Character-specific attack modifiers
-    [...Array(character.nbAttackModifiers).keys()].forEach((_, index) => {
-      const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
-      items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/${
-          character.code
-        }/am-${character.code.toLowerCase()}-${number}.png`,
-        backContent: URL_PREFIX + 'gloom/attackback.png',
-        width: 100,
-        label: `${character.name} attack modifier ${number}`,
-        groupId: `${character.name}`,
-      });
-    });
-  });
-
   // Elements
   const elements = ['ice', 'air', 'earth', 'fire', 'dark', 'light'];
   elements.forEach((elementName) => {
@@ -306,10 +187,18 @@ const genGloomhavenBox = () => {
   items.push({
     type: 'image',
     content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/element-matboard.png`,
-    width: 300,
+    width: 250,
     label: 'Element matboard',
     groupId: 'elements',
     layer: -1,
+  });
+
+  items.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/miscellaneous/round-tracker.jpg`,
+    width: 10,
+    label: 'Round tracker',
+    groupId: 'miscellaneous',
   });
 
   // Ailments (combat statuses)
@@ -371,18 +260,6 @@ const genGloomhavenBox = () => {
       width: 30,
       label: `${battleGoalName}`,
       groupId: 'battle-goals',
-    });
-  });
-
-  equipmentListing.forEach((equipment) => {
-    const number = equipment.number.toString().padStart(3, '0');
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/${equipment.imagePath}`,
-      flipped: true,
-      width: 50,
-      label: `${number}: ${equipment.name}`,
-      groupId: 'items',
     });
   });
 
@@ -493,6 +370,14 @@ const genGloomhavenBox = () => {
     width: 50,
     label: `Summon token`,
     groupId: 'summons',
+  });
+
+  items.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/miscellaneous/tick-icon.png`,
+    width: 10,
+    label: `Tick icon`,
+    groupId: 'miscellaneous',
   });
 
   return items;

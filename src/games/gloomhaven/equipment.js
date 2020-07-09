@@ -1,4 +1,6 @@
-const equipment = [
+import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+
+const equipmentConfig = [
   {
     name: 'Boots of striding',
     number: 1,
@@ -826,4 +828,20 @@ const equipment = [
   },
 ];
 
-export default equipment;
+export const genEquipment = () => {
+  const items = [];
+
+  equipmentConfig.forEach((equipment) => {
+    const number = equipment.number.toString().padStart(3, '0');
+    items.push({
+      type: 'image',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/${equipment.imagePath}`,
+      flipped: true,
+      width: 50,
+      label: `${number}: ${equipment.name}`,
+      groupId: 'items',
+    });
+  });
+
+  return items;
+};
