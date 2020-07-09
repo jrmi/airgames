@@ -1,4 +1,4 @@
-import { URL_PREFIX, EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
 
 // Characters
 const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -238,7 +238,7 @@ export const genCharacters = () => {
         content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/${
           character.code
         }/am-${character.code.toLowerCase()}-${number}.png`,
-        backContent: URL_PREFIX + 'gloom/attackback.png',
+        backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
         width: 100,
         label: `${character.name} attack modifier ${number}`,
         groupId: `${character.name}`,

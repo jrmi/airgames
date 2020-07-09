@@ -2,7 +2,7 @@ import slugify from 'slugify';
 import { genEquipment } from './equipment';
 import { genMonsters } from './monsters';
 import { genCharacters } from './characters';
-import { URL_PREFIX, EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
 
 const lowerSlug = function (text) {
   return slugify(text, { lower: true });
@@ -63,7 +63,7 @@ const genGloomhavenBox = () => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: URL_PREFIX + 'gloom/attackback.png',
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
       width: 100,
       flipped: true,
       label: `Player Attack modifier am-p-${number}`,
@@ -76,7 +76,7 @@ const genGloomhavenBox = () => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/monster/am-m-${number}.png`,
-      backContent: URL_PREFIX + 'gloom/attackback.png',
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
       width: 100,
       flipped: true,
       label: `Monster Attack modifier am-p-${number}`,
