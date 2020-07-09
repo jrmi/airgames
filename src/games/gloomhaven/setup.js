@@ -106,7 +106,7 @@ const genGloomhaven = () => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: URL_PREFIX + 'gloom/attackback.png',
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
       width: 100,
       flipped: true,
       x: 300,
@@ -119,7 +119,7 @@ const genGloomhaven = () => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: URL_PREFIX + 'gloom/attackback.png',
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
       width: 100,
       flipped: true,
       x: 300,
@@ -132,7 +132,7 @@ const genGloomhaven = () => {
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/monster/am-m-${number}.png`,
-      backContent: URL_PREFIX + 'gloom/attackback.png',
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
       width: 100,
       flipped: true,
       x: 1000,
