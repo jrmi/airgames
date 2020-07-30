@@ -101,7 +101,7 @@ const genGloomhaven = () => {
 
   // Attack modifiers
 
-  [...Array(19).keys()].forEach((_, index) => {
+  [...Array(20).keys()].forEach((_, index) => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
       type: 'image',
@@ -114,7 +114,7 @@ const genGloomhaven = () => {
     });
   });
 
-  [...Array(19).keys()].forEach((_, index) => {
+  [...Array(20).keys()].forEach((_, index) => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
       type: 'image',
@@ -127,7 +127,7 @@ const genGloomhaven = () => {
     });
   });
 
-  [...Array(19).keys()].forEach((_, index) => {
+  [...Array(20).keys()].forEach((_, index) => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
     items.push({
       type: 'image',
