@@ -216,7 +216,7 @@ const monstersConfig = [
   {
     name: 'Sun demon',
     category: 'sun-demon',
-    shortName: 'sd',
+    shortName: 'sud',
   },
   {
     name: 'Vermling scout',
