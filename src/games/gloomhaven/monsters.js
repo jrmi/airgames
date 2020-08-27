@@ -270,6 +270,10 @@ export const genMonsters = () => {
         monster.name,
         { lower: true }
       )}-0.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/${slugify(
+        monster.name,
+        { lower: true }
+      )}-4.png`,
       width: 200,
       label: `${monster.name}`,
       groupId: `monster-stat-cards`,
