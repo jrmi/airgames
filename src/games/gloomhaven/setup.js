@@ -478,8 +478,12 @@ const genGloomhaven = () => {
   return {
     items,
     availableItems: box,
-    url: `${URL_PREFIX}/gloomhaven.json`,
-    board: { size: 3000, scale: 0.5, name: 'gloomhaven' },
+    board: {
+      size: 3000,
+      scale: 0.5,
+      url: `${URL_PREFIX}/gloomhaven.json`,
+      name: 'gloomhaven',
+    },
   };
 };
 
