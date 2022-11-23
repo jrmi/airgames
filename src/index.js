@@ -20,7 +20,7 @@ const genJson = (data, name) => {
 
   fs.writeFile(`_build/${name}.json`, jsonContent, 'utf8', function (err) {
     if (err) {
-      console.log('An error occured while writing JSON Object to File.');
+      console.log('An error occurred while writing JSON Object to File.');
       return console.log(err);
     }
 
@@ -28,8 +28,8 @@ const genJson = (data, name) => {
   });
 };
 
-fs.rmdir('./_build', { recursive: true }, (err) => {
-  if (err) {
+fs.rm('./_build', { recursive: true }, (err) => {
+  if (err && err.code !== 'ENOENT') {
     throw err;
   }
   fs.mkdir('./_build', function (err) {
