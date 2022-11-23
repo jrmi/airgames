@@ -141,7 +141,6 @@ const characterConfig = [
     },
     nbAttackModifiers: 20,
   },
-  ,
   {
     name: 'tinkerer',
     code: 'TI',
@@ -171,6 +170,34 @@ const characterConfig = [
       'level-9': ['chimeric-formula', 'lethal-injection'],
     },
     nbAttackModifiers: 16,
+  },
+  {
+    name: 'beast-tyrant',
+    code: 'BT',
+    abilityCards: {
+      'level-1': [
+        'concentrated-rage',
+        'disappearing-wounds',
+        'disorienting-roar',
+        'forceful-swipe',
+        'howling-bolts',
+        'maul',
+        'patch-fur',
+        'relentless-ally',
+        'spirit-swap',
+        'venomous-ally',
+      ],
+      'level-X': ['borrowed-essence', 'focused-aggression', 'soaring-ally'],
+      'level-2': ['earthen-spikes', 'energizing-strike'],
+      'level-3': ['unstoppable-beast', 'vicious-ally'],
+      'level-4': ['ancient-ward', 'punch-throug'],
+      'level-5': ['rampage', 'stone-sigil'],
+      'level-6': ['blood-hunger', 'primal-blessing'],
+      'level-7': ['storm-sigil', 'tyrannical-force'],
+      'level-8': ['lash-out', 'natural-remedy'],
+      'level-9': ['jaws-of-death', 'tribal-sigil'],
+    },
+    nbAttackModifiers: 17,
   },
 ];
 
