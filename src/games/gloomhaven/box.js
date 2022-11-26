@@ -11,19 +11,17 @@ const lowerSlug = function (text) {
 const genGloomhavenBox = () => {
   const items = [];
 
-  // monster section
-  const monsters = genMonsters();
-  monsters.forEach((item) => items.push(item));
-
   // character section
-  const characters = genCharacters();
-  characters.forEach((item) => items.push(item));
+  items.push(genCharacters());
 
   // monster section
-  const equipment = genEquipment();
-  equipment.forEach((item) => items.push(item));
+  items.push(genMonsters());
+
+  // Equipment section
+  items.push(genEquipment());
 
   // map-tiles
+  const mapTiles = [];
   [
     'a4',
     'b4',
@@ -43,75 +41,19 @@ const genGloomhavenBox = () => {
     const [l, n] = Array.from(ln);
     [...Array(parseInt(n)).keys()].forEach((y) => {
       const incrY = y + 1;
-      items.push({
+      mapTiles.push({
         type: 'image',
         content: `${EXTERNAL_IMAGE_URL_PREFIX}/map-tiles/${l}${incrY}a.png`,
         backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/map-tiles/${l}${incrY}b.png`,
         text: `${l}${incrY}a`,
         backText: `${l}${incrY}b`,
-        layer: -1,
-        groupId: 'scenario-tiles',
+        layer: -3,
         label: `Tiles ${l}${incrY}a / ${l}${incrY}b`,
       });
     });
   });
 
-  // Attack modifiers
-
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/curse-card.jpg`,
-    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
-    width: 100,
-    flipped: true,
-    label: `Curse Attack modifier`,
-    groupId: 'attack-modifiers',
-  });
-
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/benediction-card.jpg`,
-    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
-    width: 100,
-    flipped: true,
-    label: `Benediction Attack modifier`,
-    groupId: 'attack-modifiers',
-  });
-
-  [...Array(20).keys()].forEach((_, index) => {
-    const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
-      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
-      width: 100,
-      flipped: true,
-      label: `Player Attack modifier am-p-${number}`,
-      groupId: 'attack-modifiers',
-    });
-  });
-
-  [...Array(20).keys()].forEach((_, index) => {
-    const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/monster/am-m-${number}.png`,
-      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
-      width: 100,
-      flipped: true,
-      label: `Monster Attack modifier am-p-${number}`,
-      groupId: 'attack-modifiers',
-    });
-  });
-
-  // Counters
-  items.push({
-    type: 'counter',
-    value: 0,
-    width: 50,
-    label: 'Life counter',
-    groupId: 'counters',
-  });
+  items.push({ name: 'Map tiles', items: mapTiles });
 
   // Overlay tokens
   const overlayTokens = [
@@ -178,51 +120,76 @@ const genGloomhavenBox = () => {
       ],
     },
   ];
-  overlayTokens.forEach((overlayToken) => {
-    overlayToken.elements.forEach((elementName) => {
-      items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/${lowerSlug(
-          overlayToken.name
-        )}/${lowerSlug(elementName)}.png`,
-        width: 50,
-        label: `${elementName}`,
-        groupId: `${lowerSlug(overlayToken.name)}`,
-      });
-    });
+
+  const overlay = overlayTokens.map(({ name, elements }) => {
+    return {
+      name,
+      items: elements.map((elementName) => {
+        return {
+          type: 'image',
+          content: `${EXTERNAL_IMAGE_URL_PREFIX}/overlay-tokens/${lowerSlug(
+            name
+          )}/${lowerSlug(elementName)}.png`,
+          width: 50,
+          label: `${elementName}`,
+        };
+      }),
+    };
   });
 
-  // Elements
-  const elements = ['ice', 'air', 'earth', 'fire', 'dark', 'light'];
-  elements.forEach((elementName) => {
-    items.push({
+  items.push({ name: 'Overlay token', items: overlay });
+
+  const attackModif = [];
+
+  // Attack modifiers
+  attackModif.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/curse-card.jpg`,
+    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+    width: 100,
+    label: `Curse Attack modifier`,
+  });
+
+  attackModif.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/benediction-card.jpg`,
+    backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+    width: 100,
+    label: `Benediction Attack modifier`,
+  });
+
+  const playerModif = [...Array(20).keys()].map((_, index) => {
+    const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
+    return {
       type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/${elementName}-element.svg`,
-      width: 30,
-      label: `Element ${elementName}`,
-      groupId: 'elements',
-    });
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/player/am-p-${number}.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+      width: 100,
+      label: `Player Attack modifier am-p-${number}`,
+      groupId: 'attack-modifiers',
+    };
   });
 
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/element-matboard.png`,
-    width: 250,
-    label: 'Element matboard',
-    groupId: 'elements',
-    layer: -1,
+  attackModif.push({ name: 'Player modifiers', items: playerModif });
+
+  const monsterModif = [...Array(20).keys()].map((_, index) => {
+    const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
+    return {
+      type: 'image',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/monster/am-m-${number}.png`,
+      backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+      width: 100,
+      label: `Monster Attack modifier am-p-${number}`,
+      groupId: 'attack-modifiers',
+    };
   });
 
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/miscellaneous/round-tracker.jpg`,
-    width: 10,
-    label: 'Round tracker',
-    groupId: 'miscellaneous',
-  });
+  attackModif.push({ name: 'Monster modifiers', items: monsterModif });
+
+  items.push({ name: 'Attack modifiers', items: attackModif });
 
   // Ailments (combat statuses)
-  const ailments = [
+  const ailmentNames = [
     'reinforcement',
     'disarm',
     'immobilise',
@@ -233,18 +200,21 @@ const genGloomhavenBox = () => {
     'poison',
   ];
 
-  ailments.forEach((ailmentName) => {
-    items.push({
+  const ailments = ailmentNames.map((ailmentName) => {
+    return {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/ailments/${ailmentName}.png`,
       width: 30,
       label: `${ailmentName} icon`,
-      groupId: 'ailments',
       layer: 1,
-    });
+    };
   });
 
-  const battleGoals = [
+  items.push({ name: 'Ailments', items: ailments });
+
+  const cards = [];
+
+  const battleGoalNames = [
     'aggressor',
     'diehard',
     'dynamo',
@@ -271,21 +241,22 @@ const genGloomhavenBox = () => {
     'zealot',
   ];
 
-  battleGoals.forEach((battleGoalName) => {
-    items.push({
+  const battleGoals = battleGoalNames.map((battleGoalName) => {
+    return {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/battle-goals/${battleGoalName}.png`,
       backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/battle-goals/battlegoal-back.png`,
       flipped: true,
       width: 30,
       label: `${battleGoalName}`,
-      groupId: 'battle-goals',
-    });
+    };
   });
 
+  cards.push({ name: 'Battle goals', items: battleGoals });
+
   // Personal character goals
-  [...Array(24).keys()].forEach((_, index) => {
-    items.push({
+  const charGoals = [...Array(24).keys()].map((_, index) => {
+    return {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/personal-goals/pg-${
         index + 510
@@ -293,75 +264,38 @@ const genGloomhavenBox = () => {
       backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/personal-goals/pg-back.png`,
       width: 100,
       label: `Quest ${index + 1}`,
-      groupId: 'personal-goals',
-    });
+    };
   });
 
+  cards.push({ name: 'Character goals', items: charGoals });
+
   // City events
-  [...Array(90).keys()].forEach((_, index) => {
+  const cityEvents = [...Array(90).keys()].map((_, index) => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
-    items.push({
+    return {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/events/base/city/ce-${number}-f.png`,
       backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/events/base/city/ce-${number}-b.png`,
       width: 100,
       label: `City event ${number}`,
-      groupId: 'city-events',
-    });
+    };
   });
 
+  cards.push({ name: 'City events', items: cityEvents });
+
   // Road events
-  [...Array(83).keys()].forEach((_, index) => {
+  const roadEvents = [...Array(83).keys()].map((_, index) => {
     const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
-    items.push({
+    return {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/events/base/road/re-${number}-f.png`,
       backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/events/base/road/re-${number}-b.png`,
       width: 100,
       label: `Road event ${number}`,
-      groupId: 'road-events',
-    });
+    };
   });
 
-  // Map elements
-  [...Array(95).keys()].forEach((_, index) => {
-    const number = index + 1;
-    if ([11, 12, 35, 36].includes(number)) {
-      // These tiles are special, and handled outside of this loop
-      return;
-    }
-    items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/${number}.png`,
-      width: 100,
-      label: `Map tile ${number}`,
-      groupId: 'world-map',
-    });
-  });
-
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/11-12.png`,
-    width: 100,
-    label: `Map tile 11-12`,
-    groupId: 'world-map',
-  });
-
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/35-36.png`,
-    width: 100,
-    label: `Map tile 35-36`,
-    groupId: 'world-map',
-  });
-
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/gloomhaven-map-orig.png`,
-    width: 1000,
-    label: `World map`,
-    groupId: 'world-map',
-  });
+  cards.push({ name: 'Road events', items: roadEvents });
 
   const randomScenarioNames = [
     'arcane-library',
@@ -374,17 +308,117 @@ const genGloomhavenBox = () => {
     'well-of-the-unfortunate',
     'windswept-highlands',
   ];
-  randomScenarioNames.forEach((scenarioName, index) => {
-    items.push({
+
+  const randomScenario = randomScenarioNames.map((scenarioName, index) => {
+    return {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/random-scenarios/${scenarioName}.png`,
       width: 50,
       label: `Scenario ${index + 1}`,
       groupId: 'random-scenarii',
-    });
+    };
   });
 
+  cards.push({ name: 'Random scenarii', items: randomScenario });
+
+  items.push({ name: 'Cards', items: cards });
+
+  const elements = ['ice', 'air', 'earth', 'fire', 'dark', 'light'].map(
+    (elementName) => {
+      return {
+        type: 'image',
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/${elementName}-element.svg`,
+        width: 30,
+        label: `Element ${elementName}`,
+      };
+    }
+  );
+
+  elements.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/elements/element-matboard.png`,
+    width: 250,
+    label: 'Matboard',
+    layer: -1,
+  });
+
+  // Elements
   items.push({
+    name: 'Elements',
+    items: elements,
+  });
+
+  const worldMap = [];
+
+  worldMap.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/gloomhaven-map-orig.png`,
+    width: 1000,
+    label: `World map`,
+  });
+
+  // Map locations
+  const mapLocations = [...Array(95).keys()]
+    .map((_, index) => {
+      const number = index + 1;
+      if ([11, 12, 35, 36].includes(number)) {
+        // These tiles are special, and handled outside of this loop
+        return;
+      }
+      return {
+        type: 'image',
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/${number}.png`,
+        width: 100,
+        label: `Map tile ${number}`,
+      };
+    })
+    .filter((el) => el);
+
+  mapLocations.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/11-12.png`,
+    width: 100,
+    label: `Map tile 11-12`,
+  });
+
+  mapLocations.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/35-36.png`,
+    width: 100,
+    label: `Map tile 35-36`,
+  });
+
+  worldMap.push({ name: 'Locations', items: mapLocations });
+
+  items.push({ name: 'World map', items: worldMap });
+
+  const miscellaneous = [];
+
+  miscellaneous.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/miscellaneous/round-tracker.jpg`,
+    width: 10,
+    label: 'Round tracker',
+    groupId: 'miscellaneous',
+  });
+
+  // Counters
+  miscellaneous.push({
+    type: 'counter',
+    value: 0,
+    width: 50,
+    label: 'Life counter',
+  });
+
+  miscellaneous.push({
+    type: 'image',
+    content: `${EXTERNAL_IMAGE_URL_PREFIX}/miscellaneous/tick-icon.png`,
+    width: 10,
+    label: `Tick icon`,
+    groupId: 'miscellaneous',
+  });
+
+  miscellaneous.push({
     type: 'image',
     content: `${EXTERNAL_IMAGE_URL_PREFIX}/summons/summons.png`,
     width: 50,
@@ -392,13 +426,7 @@ const genGloomhavenBox = () => {
     groupId: 'summons',
   });
 
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/miscellaneous/tick-icon.png`,
-    width: 10,
-    label: `Tick icon`,
-    groupId: 'miscellaneous',
-  });
+  items.push({ name: 'Miscellaneous', items: miscellaneous });
 
   return items;
 };

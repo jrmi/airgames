@@ -839,9 +839,8 @@ export const genEquipment = () => {
       flipped: true,
       width: 50,
       label: `${number}: ${equipment.name}`,
-      groupId: 'items',
     });
   });
 
-  return items;
+  return { name: 'Items', items };
 };

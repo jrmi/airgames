@@ -241,70 +241,70 @@ const monstersConfig = [
 ];
 
 export const genMonsters = () => {
-  const items = [];
-  const monsterModes = ['normal', 'elite'];
-
-  monstersConfig.forEach((monster) => {
-    // monster tokens
-    monsterModes.forEach((monsterMode) => {
-      items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${slugify(
-          monster.name,
-          { lower: true }
-        )}.png`,
-        width: 60,
-        text: 'X',
-        overlay: {
-          content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${monsterMode}-monster-overlay.svg`,
-        },
-        label: `${monster.name} ${monsterMode}`,
-        groupId: 'monster-tokens',
-      });
-    });
+  const monsterItems = monstersConfig.map(({ name, category, shortName }) => {
+    const items = [];
 
     // monster stat cards
     items.push({
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/${slugify(
-        monster.name,
+        name,
         { lower: true }
       )}-0.png`,
       backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/${slugify(
-        monster.name,
+        name,
         { lower: true }
       )}-4.png`,
       width: 200,
-      label: `${monster.name}`,
+      label: `Stat card`,
+    });
+
+    // Add sleeve
+    items.push({
+      type: 'image',
+      content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/monster-stat-sleeve.png`,
+      width: 200,
+      label: `Monster stats sleeve`,
       groupId: `monster-stat-cards`,
     });
 
-    // monster ability cards
-    [...Array(8).keys()].forEach((_, index) => {
+    // monster tokens
+    ['normal', 'elite'].forEach((monsterMode) => {
       items.push({
         type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/${slugify(
-          monster.category,
-          { lower: true }
-        )}/ma-${monster.shortName}-${index + 1}.png`,
-        backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/${slugify(
-          monster.category,
-          { lower: true }
-        )}/ma-${monster.shortName}-back.png`,
-        width: 100,
-        label: `${monster.name} ${index + 1}`,
-        groupId: `monster-ability-cards`,
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${slugify(name, {
+          lower: true,
+        })}.png`,
+        width: 60,
+        text: 'X',
+        overlay: {
+          content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${monsterMode}-monster-overlay.svg`,
+        },
+        label: `Token ${monsterMode}`,
       });
     });
+
+    // monster ability cards
+    const abilityCards = [...Array(8).keys()].map((_, index) => {
+      return {
+        type: 'image',
+        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/${slugify(
+          category,
+          { lower: true }
+        )}/ma-${shortName}-${index + 1}.png`,
+        backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-ability-cards/${slugify(
+          category,
+          { lower: true }
+        )}/ma-${shortName}-back.png`,
+        width: 100,
+        label: `${name} ${index + 1}`,
+      };
+    });
+
+    items.push({ name: 'Ability cards', items: abilityCards });
+
+    return { name, items };
   });
 
-  items.push({
-    type: 'image',
-    content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-stat-cards/monster-stat-sleeve.png`,
-    width: 200,
-    label: `Monster stats sleeve`,
-    groupId: `monster-stat-cards`,
-  });
-
-  return items;
+  return { name: 'Monsters', items: monsterItems };
 };

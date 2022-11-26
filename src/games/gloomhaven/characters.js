@@ -202,24 +202,8 @@ const characterConfig = [
 ];
 
 export const genCharacters = () => {
-  const items = [];
-
-  characterConfig.forEach((character) => {
-    // Character cards
-    levels.forEach((level) => {
-      character.abilityCards[`level-${level}`].forEach((abilityName) => {
-        items.push({
-          type: 'image',
-          content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${character.code}/${abilityName}.png`,
-          backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${
-            character.code
-          }/${character.code.toLowerCase()}-back.png`,
-          width: 100,
-          label: `Level ${level} card: ${abilityName}`,
-          groupId: `${character.name}`,
-        });
-      });
-    });
+  const characterItems = characterConfig.map((character) => {
+    const items = [];
 
     // Character icons/tokens
     items.push({
@@ -227,7 +211,6 @@ export const genCharacters = () => {
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
       width: 40,
       label: `${character.name} icon`,
-      groupId: `${character.name}`,
     });
 
     items.push({
@@ -235,7 +218,6 @@ export const genCharacters = () => {
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-character-token.png`,
       width: 20,
       label: `${character.name} token`,
-      groupId: `${character.name}`,
     });
 
     // Character mats
@@ -245,7 +227,6 @@ export const genCharacters = () => {
       backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-mats/${character.name}-back.png`,
       width: 300,
       label: `${character.name} mat-board`,
-      groupId: `${character.name}`,
       layer: -1,
     });
 
@@ -254,24 +235,46 @@ export const genCharacters = () => {
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-perks/${character.name}-perks.png`,
       width: 300,
       label: `${character.name} perks-board`,
-      groupId: `${character.name}`,
     });
 
-    // Character-specific attack modifiers
-    [...Array(character.nbAttackModifiers).keys()].forEach((_, index) => {
-      const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
-      items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/${
-          character.code
-        }/am-${character.code.toLowerCase()}-${number}.png`,
-        backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
-        width: 100,
-        label: `${character.name} attack modifier ${number}`,
-        groupId: `${character.name}`,
+    // Character cards
+    const cards = [];
+    levels.forEach((level) => {
+      character.abilityCards[`level-${level}`].forEach((abilityName) => {
+        cards.push({
+          type: 'image',
+          content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${character.code}/${abilityName}.png`,
+          backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/character-ability-cards/${
+            character.code
+          }/${character.code.toLowerCase()}-back.png`,
+          width: 100,
+          label: `Level ${level} card: ${abilityName}`,
+        });
       });
     });
+
+    items.push({ name: 'Cards', items: cards });
+
+    // Character-specific attack modifiers
+    const modif = [...Array(character.nbAttackModifiers).keys()].map(
+      (_, index) => {
+        const number = index < 9 ? '0' + (index + 1) : '' + (index + 1);
+        return {
+          type: 'image',
+          content: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/${
+            character.code
+          }/am-${character.code.toLowerCase()}-${number}.png`,
+          backContent: `${EXTERNAL_IMAGE_URL_PREFIX}/attack-modifiers/base/attackback.png`,
+          width: 100,
+          label: `${character.name} attack modifier ${number}`,
+        };
+      }
+    );
+
+    items.push({ name: 'Modifiers', items: modif });
+
+    return { name: character.name, items };
   });
 
-  return items;
+  return { name: 'Characters', items: characterItems };
 };
