@@ -330,7 +330,7 @@ export const genCharacters = () => {
     items.push({
       type: 'advancedImage',
       front: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
-      width: 40,
+      width: 50,
       label: `${character.name} icon`,
       holdItems: true,
       layers: [

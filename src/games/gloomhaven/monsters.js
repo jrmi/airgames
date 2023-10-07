@@ -318,8 +318,8 @@ export const genMonsters = () => {
               x: 0,
               y: 0,
             },
-            offsetX: -64,
-            offsetY: -38,
+            offsetX: 0,
+            offsetY: 20,
           },
           {
             uid: 'vGMVz759gh',
@@ -333,9 +333,9 @@ export const genMonsters = () => {
               x: 0,
               y: 0,
             },
-            offsetX: -70,
+            offsetX: -75,
             offsetY: 100,
-            value: 1,
+            value: 0,
           },
         ],
         actions: [
