@@ -1,6 +1,9 @@
 import slugify from 'slugify';
 
-import { EXTERNAL_IMAGE_URL_PREFIX, LOCAL_IMAGE_URL_PREFIX } from '../../config';
+import {
+  EXTERNAL_IMAGE_URL_PREFIX,
+  LOCAL_IMAGE_URL_PREFIX,
+} from '../../config';
 
 const monstersConfig = [
   {
@@ -257,7 +260,24 @@ export const genMonsters = () => {
       )}-4.png`,
       width: 200,
       label: `Stat card`,
-      layer: -1
+      layer: -1,
+      actions: [
+        {
+          name: 'rotate',
+          args: {
+            angle: 90,
+          },
+        },
+        {
+          name: 'flip',
+        },
+        {
+          name: 'lock',
+        },
+        {
+          name: 'remove',
+        },
+      ],
     });
 
     // Add sleeve
@@ -280,46 +300,86 @@ export const genMonsters = () => {
         text: 'X',
         layers: [
           {
-            "uid": "kTAdKBHjFe",
-            "images": [
+            uid: 'kTAdKBHjFe',
+            images: [
               {
-                "uid": "787rPQsjuF",
-                "type": "local",
-                "content": `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-normal.png`
+                uid: '787rPQsjuF',
+                type: 'external',
+                content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-normal.png`,
               },
               {
-                "uid": "787rPQsjuF",
-                "type": "local",
-                "content": `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-elite.png`
+                uid: '787rPPQsjuF',
+                type: 'external',
+                content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-elite.png`,
               },
             ],
-            "side": "both",
-            "offset": {
-              "x": 0,
-              "y": 0
+            side: 'both',
+            offset: {
+              x: 0,
+              y: 0,
             },
-            "offsetX": -64,
-            "offsetY": -38
+            offsetX: -64,
+            offsetY: -38,
           },
           {
-            "uid": "vGMVz759gh",
-            "images": [...Array(20).keys()].map((index)=>({uid:index, type:"external", content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`})),
-            "side": "front",
-            "offset": {
-              "x": 0,
-              "y": 0
+            uid: 'vGMVz759gh',
+            images: [...Array(30).keys()].map((index) => ({
+              uid: index,
+              type: 'external',
+              content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`,
+            })),
+            side: 'front',
+            offset: {
+              x: 0,
+              y: 0,
             },
-            "offsetX": -57,
-            "offsetY": 73,
-            "value": 1
-          }
+            offsetX: -70,
+            offsetY: 100,
+            value: 1,
+          },
+        ],
+        actions: [
+          {
+            name: 'prevImageForLayer',
+            uid: 'mq4Z3',
+            args: {
+              step: -1,
+              layer: 1,
+              customLabel: 'PV -1',
+            },
+          },
+          {
+            name: 'nextImageForLayer',
+            uid: 'ZxhkP',
+            args: {
+              step: 1,
+              layer: 1,
+              customLabel: 'PV +1',
+            },
+          },
+          {
+            name: 'nextImageForLayer',
+            uid: 'YxNtR',
+            args: {
+              step: 1,
+              layer: 0,
+              customLabel: 'Elite',
+            },
+          },
+          {
+            name: 'shuffle',
+          },
+          {
+            name: 'clone',
+          },
+          {
+            name: 'remove',
+          },
         ],
         label: `Token`,
         holdItems: true,
       });
     });
-
-    
 
     // monster ability cards
     const abilityCards = [...Array(8).keys()].map((_, index) => {
@@ -345,4 +405,3 @@ export const genMonsters = () => {
 
   return { name: 'Monsters', items: monsterItems };
 };
-

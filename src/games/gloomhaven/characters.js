@@ -1,4 +1,7 @@
-import { EXTERNAL_IMAGE_URL_PREFIX, LOCAL_IMAGE_URL_PREFIX } from '../../config';
+import {
+  EXTERNAL_IMAGE_URL_PREFIX,
+  LOCAL_IMAGE_URL_PREFIX,
+} from '../../config';
 
 // Characters
 const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -332,17 +335,50 @@ export const genCharacters = () => {
       holdItems: true,
       layers: [
         {
-          "uid": "vGMVz759gh",
-          "images": [...Array(20).keys()].map((index)=>({uid:index, type:"external", content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`})),
-          "side": "front",
-          "offset": {
-            "x": 0,
-            "y": 0
+          uid: 'vGMVz759gh',
+          images: [...Array(20).keys()].map((index) => ({
+            uid: index,
+            type: 'external',
+            content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`,
+          })),
+          side: 'front',
+          offset: {
+            x: 0,
+            y: 0,
           },
-          "offsetX": -25,
-          "offsetY": 0,
-          "value": 1
-        }
+          offsetX: -110,
+          offsetY: -165,
+          value: 1,
+        },
+      ],
+      actions: [
+        {
+          name: 'tap',
+        },
+        {
+          name: 'prevImageForLayer',
+          uid: 'mq4Z3',
+          args: {
+            step: -1,
+            layer: 0,
+            customLabel: 'PV -1',
+          },
+        },
+        {
+          name: 'nextImageForLayer',
+          uid: 'ZxhkP',
+          args: {
+            step: 1,
+            layer: 0,
+            customLabel: 'PV +1',
+          },
+        },
+        {
+          name: 'clone',
+        },
+        {
+          name: 'remove',
+        },
       ],
     });
 
