@@ -1,4 +1,4 @@
-import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+import { EXTERNAL_IMAGE_URL_PREFIX, LOCAL_IMAGE_URL_PREFIX } from '../../config';
 
 // Characters
 const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -325,10 +325,25 @@ export const genCharacters = () => {
 
     // Character icons/tokens
     items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
+      type: 'advancedImage',
+      front: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
       width: 40,
       label: `${character.name} icon`,
+      holdItems: true,
+      layers: [
+        {
+          "uid": "vGMVz759gh",
+          "images": [...Array(20).keys()].map((index)=>({uid:index, type:"external", content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`})),
+          "side": "front",
+          "offset": {
+            "x": 0,
+            "y": 0
+          },
+          "offsetX": -25,
+          "offsetY": 0,
+          "value": 1
+        }
+      ],
     });
 
     items.push({
@@ -346,6 +361,7 @@ export const genCharacters = () => {
       width: 300,
       label: `${character.name} mat-board`,
       layer: -1,
+      holdItems: true,
     });
 
     items.push({
@@ -353,6 +369,7 @@ export const genCharacters = () => {
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-perks/${character.name}-perks.png`,
       width: 300,
       label: `${character.name} perks-board`,
+      holdItems: true,
     });
 
     // Character cards

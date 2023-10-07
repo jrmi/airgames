@@ -1,6 +1,6 @@
 import slugify from 'slugify';
 
-import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+import { EXTERNAL_IMAGE_URL_PREFIX, LOCAL_IMAGE_URL_PREFIX } from '../../config';
 
 const monstersConfig = [
   {
@@ -257,6 +257,7 @@ export const genMonsters = () => {
       )}-4.png`,
       width: 200,
       label: `Stat card`,
+      layer: -1
     });
 
     // Add sleeve
@@ -269,20 +270,56 @@ export const genMonsters = () => {
     });
 
     // monster tokens
-    ['normal', 'elite'].forEach((monsterMode) => {
+    ['normal'].forEach((monsterMode) => {
       items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${slugify(name, {
+        type: 'advancedImage',
+        front: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${slugify(name, {
           lower: true,
         })}.png`,
         width: 60,
         text: 'X',
-        overlay: {
-          content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${monsterMode}-monster-overlay.svg`,
-        },
-        label: `Token ${monsterMode}`,
+        layers: [
+          {
+            "uid": "kTAdKBHjFe",
+            "images": [
+              {
+                "uid": "787rPQsjuF",
+                "type": "local",
+                "content": `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-normal.png`
+              },
+              {
+                "uid": "787rPQsjuF",
+                "type": "local",
+                "content": `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-elite.png`
+              },
+            ],
+            "side": "both",
+            "offset": {
+              "x": 0,
+              "y": 0
+            },
+            "offsetX": -64,
+            "offsetY": -38
+          },
+          {
+            "uid": "vGMVz759gh",
+            "images": [...Array(20).keys()].map((index)=>({uid:index, type:"external", content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`})),
+            "side": "front",
+            "offset": {
+              "x": 0,
+              "y": 0
+            },
+            "offsetX": -57,
+            "offsetY": 73,
+            "value": 1
+          }
+        ],
+        label: `Token`,
+        holdItems: true,
       });
     });
+
+    
 
     // monster ability cards
     const abilityCards = [...Array(8).keys()].map((_, index) => {
@@ -308,3 +345,4 @@ export const genMonsters = () => {
 
   return { name: 'Monsters', items: monsterItems };
 };
+

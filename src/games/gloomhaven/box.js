@@ -49,6 +49,7 @@ const genGloomhavenBox = () => {
         backText: `${l}${incrY}b`,
         layer: -3,
         label: `Tiles ${l}${incrY}a / ${l}${incrY}b`,
+        holdItems: true,
       });
     });
   });
@@ -132,6 +133,7 @@ const genGloomhavenBox = () => {
           )}/${lowerSlug(elementName)}.png`,
           width: 50,
           label: `${elementName}`,
+          layer: -1,
         };
       }),
     };
@@ -340,6 +342,7 @@ const genGloomhavenBox = () => {
     width: 250,
     label: 'Matboard',
     layer: -1,
+    holdItems: true,
   });
 
   // Elements
@@ -355,6 +358,7 @@ const genGloomhavenBox = () => {
     content: `${EXTERNAL_IMAGE_URL_PREFIX}/world-map/gloomhaven-map-orig.png`,
     width: 1000,
     label: `World map`,
+    holdItems: true,
   });
 
   // Map locations

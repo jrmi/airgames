@@ -837,7 +837,7 @@ export const genEquipment = () => {
       type: 'image',
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/${equipment.imagePath}`,
       flipped: true,
-      width: 50,
+      width: 80,
       label: `${number}: ${equipment.name}`,
     });
   });
