@@ -476,7 +476,10 @@ const genGloomhaven = () => {
   });
 
   return {
-    items,
+    items: items.map((item, index) => {
+      item.id = `${index}`;
+      return item;
+    }),
     availableItems: box,
     board: {
       size: 3000,

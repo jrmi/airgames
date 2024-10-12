@@ -1,4 +1,7 @@
-import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+import {
+  EXTERNAL_IMAGE_URL_PREFIX,
+  LOCAL_IMAGE_URL_PREFIX,
+} from '../../config';
 
 // Characters
 const levels = ['1', 'X', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -142,6 +145,36 @@ const characterConfig = [
     nbAttackModifiers: 20,
   },
   {
+    name: 'sawbones',
+    code: 'SB',
+    abilityCards: {
+      'level-1': [
+        'battlefield-medicine',
+        'bloody-saw',
+        'booster-shot',
+        'curative-mixture',
+        'first-aid',
+        'hand-of-the-surgeon',
+        'hold-back-the-pain',
+        'mobile-response',
+        'syringe',
+        'triage',
+        'medical-pack',
+        'large-medical-pack',
+      ],
+      'level-X': ['prevention-is-key', 'teamwork', 'vaccine'],
+      'level-2': ['hamstring', 'precaution'],
+      'level-3': ['regenerative-tissue', 'vital-strike'],
+      'level-4': ['blood-transfusion', 'do-no-harm'],
+      'level-5': ['amputate', 'research-the-cure'],
+      'level-6': ['euthanize', 'prescription'],
+      'level-7': ['master-physician', 'surgeons-satchel'],
+      'level-8': ['bedside-manner', 'gentlemans-anger'],
+      'level-9': ['grisly-trauma', 'prep-for-surgery'],
+    },
+    nbAttackModifiers: 14,
+  },
+  {
     name: 'sunkeeper',
     code: 'SK',
     abilityCards: {
@@ -168,7 +201,7 @@ const characterConfig = [
       'level-8': ['cleansing-force', 'inspiring-sanctity'],
       'level-9': ['angelic-ascension', 'divine-intervention'],
     },
-    nbAttackModifiers: 20,
+    nbAttackModifiers: 19,
   },
   {
     name: 'tinkerer',
@@ -286,6 +319,65 @@ const characterConfig = [
     },
     nbAttackModifiers: 17,
   },
+  {
+    name: 'quartermaster',
+    code: 'QM',
+    abilityCards: {
+      'level-1': [
+        'cleaving-axe',
+        'crippling-bow',
+        'hastened-step',
+        'impaling-spear',
+        'iron-bulwark',
+        'oversized-pack',
+        'proficiency',
+        'restock',
+        'sharpening-kit',
+      ],
+      'level-X': ['crushing-hammer', 'reserved-energy', 'scroll-of-recall'],
+      'level-2': ['bladed-boomerang', 'reforge'],
+      'level-3': ['continual-supply', 'scroll-of-lightning'],
+      'level-4': ['giant-club', 'side-pouch'],
+      'level-5': ['reinforced-steel', 'scroll-of-judgment'],
+      'level-6': ['catastrophic-bomb', 'quiver-of-arrows'],
+      'level-7': ['refreshment', 'scroll-of-blizzards'],
+      'level-8': ['fortified-position', 'portable-ballista'],
+      'level-9': ['bag-of-holding', 'scroll-of-annihilation'],
+    },
+    nbAttackModifiers: 18,
+  },
+  {
+    name: 'elementalist',
+    code: 'EL',
+    abilityCards: {
+      'level-1': [
+        'formless-power',
+        'frigid-torrent',
+        'ice-spikes',
+        'infernal-vortex',
+        'lava-eruption',
+        'pure-augmentation',
+        'raw-enhancement',
+        'shaping-the-ether',
+        'stoking-hail',
+        'tremulant-cyclone',
+      ],
+      'level-X': [
+        'brilliant-flash',
+        'encompassing-shadow',
+        'malleable-evocation',
+      ],
+      'level-2': ['boiling-arc', 'crystallizing-blast'],
+      'level-3': ['burial', 'chain-lightning'],
+      'level-4': ['gravel-vortex', 'primal-duality'],
+      'level-5': ['obsidian-shards', 'winters-edge'],
+      'level-6': ['eye-of-the-hurricane', 'simulacrum'],
+      'level-7': ['pragmatic-reinforcement', 'vengeance'],
+      'level-8': ['elemental-aegis', 'volatile-consumption'],
+      'level-9': ['eternal-equilibrium', 'ethereal-manifestation'],
+    },
+    nbAttackModifiers: 24,
+  },
 ];
 
 export const genCharacters = () => {
@@ -294,10 +386,58 @@ export const genCharacters = () => {
 
     // Character icons/tokens
     items.push({
-      type: 'image',
-      content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
-      width: 40,
+      type: 'advancedImage',
+      front: `${EXTERNAL_IMAGE_URL_PREFIX}/character-icons/${character.name}-icon.png`,
+      width: 50,
       label: `${character.name} icon`,
+      holdItems: true,
+      layers: [
+        {
+          uid: 'vGMVz759gh',
+          images: [...Array(20).keys()].map((index) => ({
+            uid: index,
+            type: 'external',
+            content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`,
+          })),
+          side: 'front',
+          offset: {
+            x: 0,
+            y: 0,
+          },
+          offsetX: -110,
+          offsetY: -165,
+          value: 1,
+        },
+      ],
+      actions: [
+        {
+          name: 'tap',
+        },
+        {
+          name: 'prevImageForLayer',
+          uid: 'mq4Z3',
+          args: {
+            step: -1,
+            layer: 0,
+            customLabel: 'PV -1',
+          },
+        },
+        {
+          name: 'nextImageForLayer',
+          uid: 'ZxhkP',
+          args: {
+            step: 1,
+            layer: 0,
+            customLabel: 'PV +1',
+          },
+        },
+        {
+          name: 'clone',
+        },
+        {
+          name: 'remove',
+        },
+      ],
     });
 
     items.push({
@@ -315,6 +455,7 @@ export const genCharacters = () => {
       width: 300,
       label: `${character.name} mat-board`,
       layer: -1,
+      holdItems: true,
     });
 
     items.push({
@@ -322,6 +463,7 @@ export const genCharacters = () => {
       content: `${EXTERNAL_IMAGE_URL_PREFIX}/character-perks/${character.name}-perks.png`,
       width: 300,
       label: `${character.name} perks-board`,
+      holdItems: true,
     });
 
     // Character cards

@@ -1,6 +1,9 @@
 import slugify from 'slugify';
 
-import { EXTERNAL_IMAGE_URL_PREFIX } from '../../config';
+import {
+  EXTERNAL_IMAGE_URL_PREFIX,
+  LOCAL_IMAGE_URL_PREFIX,
+} from '../../config';
 
 const monstersConfig = [
   {
@@ -257,6 +260,24 @@ export const genMonsters = () => {
       )}-4.png`,
       width: 200,
       label: `Stat card`,
+      layer: -1,
+      actions: [
+        {
+          name: 'rotate',
+          args: {
+            angle: 90,
+          },
+        },
+        {
+          name: 'flip',
+        },
+        {
+          name: 'lock',
+        },
+        {
+          name: 'remove',
+        },
+      ],
     });
 
     // Add sleeve
@@ -269,18 +290,94 @@ export const genMonsters = () => {
     });
 
     // monster tokens
-    ['normal', 'elite'].forEach((monsterMode) => {
+    ['normal'].forEach((monsterMode) => {
       items.push({
-        type: 'image',
-        content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${slugify(name, {
+        type: 'advancedImage',
+        front: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${slugify(name, {
           lower: true,
         })}.png`,
         width: 60,
         text: 'X',
-        overlay: {
-          content: `${EXTERNAL_IMAGE_URL_PREFIX}/monster-tokens/${monsterMode}-monster-overlay.svg`,
-        },
-        label: `Token ${monsterMode}`,
+        layers: [
+          {
+            uid: 'kTAdKBHjFe',
+            images: [
+              {
+                uid: '787rPQsjuF',
+                type: 'external',
+                content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-normal.png`,
+              },
+              {
+                uid: '787rPPQsjuF',
+                type: 'external',
+                content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/monster-overlay-elite.png`,
+              },
+            ],
+            side: 'both',
+            offset: {
+              x: 0,
+              y: 0,
+            },
+            offsetX: 0,
+            offsetY: 20,
+          },
+          {
+            uid: 'vGMVz759gh',
+            images: [...Array(30).keys()].map((index) => ({
+              uid: index,
+              type: 'external',
+              content: `${LOCAL_IMAGE_URL_PREFIX}/src/games/gloomhaven/life_${index}.png`,
+            })),
+            side: 'front',
+            offset: {
+              x: 0,
+              y: 0,
+            },
+            offsetX: -75,
+            offsetY: 100,
+            value: 0,
+          },
+        ],
+        actions: [
+          {
+            name: 'prevImageForLayer',
+            uid: 'mq4Z3',
+            args: {
+              step: -1,
+              layer: 1,
+              customLabel: 'PV -1',
+            },
+          },
+          {
+            name: 'nextImageForLayer',
+            uid: 'ZxhkP',
+            args: {
+              step: 1,
+              layer: 1,
+              customLabel: 'PV +1',
+            },
+          },
+          {
+            name: 'nextImageForLayer',
+            uid: 'YxNtR',
+            args: {
+              step: 1,
+              layer: 0,
+              customLabel: 'Elite',
+            },
+          },
+          {
+            name: 'shuffle',
+          },
+          {
+            name: 'clone',
+          },
+          {
+            name: 'remove',
+          },
+        ],
+        label: `Token`,
+        holdItems: true,
       });
     });
 
