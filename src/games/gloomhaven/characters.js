@@ -378,6 +378,33 @@ const characterConfig = [
     },
     nbAttackModifiers: 24,
   },
+  {
+    name: 'nightshroud',
+    code: 'NS',
+    abilityCards: {
+      'level-1': [
+        'black-knives',
+        'cloak-of-shade',
+        'dancing-shadows',
+        'doomed-breeze',
+        'empowering-void',
+        'enervating-wound',
+        'silent-force',
+        'smoke-step',
+        'spirit-of-the-night',
+      ],
+      'level-X': ['concealed-dominance', 'dark-cloud', 'wings-of-the-night'],
+      'level-2': ['prepare-for-the-kill', 'soulfire'],
+      'level-3': ['armor-of-the-night', 'terror-blade'],
+      'level-4': ['grim-sustenance', 'nightfall'],
+      'level-5': ['black-arrow', 'claws-of-the-night'],
+      'level-6': ['unseen-dread', 'swallowed-by-fear'],
+      'level-7': ['eyes-of-the-night', 'quiet-frenzy'],
+      'level-8': ['gloom-darts', 'lurking-ruin'],
+      'level-9': ['angel-of-death', 'voice-of-the-night'],
+    },
+    nbAttackModifiers: 19,
+  },
 ];
 
 export const genCharacters = () => {
